@@ -39,20 +39,36 @@ function createLeatherPatchTexture() {
   ctx.strokeRect(28, 28, 456, 264);
   ctx.setLineDash([]);
 
-  // Debossed brand
-  ctx.font = "bold 92px 'Arial Black', Arial, sans-serif";
+  // Debossed brand — BRANDiT
   ctx.textAlign = "center";
   ctx.textBaseline = "middle";
-  ctx.fillStyle = "rgba(30, 20, 10, 0.45)";
-  ctx.fillText("BRAND", 248, 148);
-  ctx.fillStyle = "rgba(20, 12, 6, 0.55)";
-  ctx.font = "bold 92px Arial, sans-serif";
-  ctx.fillText("iT", 400, 148);
+  ctx.font = "900 88px 'Arial Black', Impact, sans-serif";
+  const brand = "BRAND";
+  const it = "iT";
+  const brandW = ctx.measureText(brand).width;
+  ctx.font = "900 88px Impact, Arial Black, sans-serif";
+  const itW = ctx.measureText(it).width;
+  const total = brandW + itW * 0.92;
+  const startX = 256 - total / 2;
+  const y = 160;
 
-  // Soft highlight on letters
-  ctx.fillStyle = "rgba(255, 230, 180, 0.12)";
-  ctx.font = "bold 92px 'Arial Black', Arial, sans-serif";
-  ctx.fillText("BRAND", 246, 146);
+  ctx.fillStyle = "rgba(28, 18, 8, 0.5)";
+  ctx.font = "900 88px 'Arial Black', Impact, sans-serif";
+  ctx.textAlign = "left";
+  ctx.fillText(brand, startX + 2, y + 2);
+  ctx.fillStyle = "rgba(20, 12, 6, 0.42)";
+  ctx.fillText(brand, startX, y);
+
+  ctx.fillStyle = "rgba(55, 35, 15, 0.55)";
+  ctx.font = "900 88px Impact, Arial Black, sans-serif";
+  ctx.fillText(it, startX + brandW - 4, y + 2);
+  ctx.fillStyle = "rgba(40, 25, 10, 0.48)";
+  ctx.fillText(it, startX + brandW - 6, y);
+
+  // Soft highlight edge
+  ctx.fillStyle = "rgba(255, 230, 180, 0.1)";
+  ctx.font = "900 88px 'Arial Black', Impact, sans-serif";
+  ctx.fillText(brand, startX - 1, y - 1);
 
   const texture = new THREE.CanvasTexture(canvas);
   texture.colorSpace = THREE.SRGBColorSpace;
